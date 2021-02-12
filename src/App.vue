@@ -1,13 +1,25 @@
 <template>
   <div id="app">
     <div id="nav">
+      {{currentRouteName}}
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/price">Price</router-link>|
+      <router-link to="/pendu">Pendu</router-link>|
+      <router-link to="/mastermind">Mastermind</router-link>
     </div>
     <router-view/>
   </div>
 </template>
-
+<script>
+  export default {
+    name: 'app',
+    computed: {
+      currentRouteName() {
+        return this.$route.name;
+      }
+    }
+  }
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
