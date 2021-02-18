@@ -1,0 +1,89 @@
+.border {
+    border: 1px solid black;
+}
+
+.button-validate {
+    margin: 10px;
+    width: 100px;
+    padding: 10px 10px;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+.center-legend {
+    display: flex;
+    justify-content: center;
+}
+
+.circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    margin: 0 10px;
+    display: flex;
+}
+
+.circle-black {
+    background-color: black;
+}
+
+.circle-blue {
+    background-color: blue;
+}
+
+.circle-good {
+    background-color: #FFAB4C;
+}
+
+.circle-green {
+    background-color: green;
+}
+
+.circle-perfect {
+    background-color: #9BFF4C;
+}
+
+.circle-purple {
+    background-color: purple;
+}
+
+.circle-red {
+    background-color: red;
+}
+
+.circle-white {
+    background-color: white;
+}
+
+.choice-bord {
+    display: flex;
+    flex-direction: row;
+}
+
+.legend {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.margin-10 {
+    margin: 10px;
+}
+
+.padding-10 {
+    padding: 10px;
+}
+.pointer {
+    cursor: pointer;
+}
+
+.width-50 {
+    width: 50px;
+}
+
