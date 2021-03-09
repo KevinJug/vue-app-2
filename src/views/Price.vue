@@ -1,20 +1,17 @@
 <template>
     <div>
-        <div v-if="!search">
-            <label>Limite</label>
-            <input v-model="limit">
-        </div>
-        <div v-else-if="!win">
-            <p> Trouvez la valeur entre 0 et {{limit}}</p>
-            <label>Valeur</label>
-            <input v-model="price">
-            <p>Votre valeur : {{number}}</p>
-            <p>Essai : {{counter}}</p>
-            <p>{{message}}</p>
+        <div v-if="!win">
+            <p> Trouvez la valeur entre 0 et {{limit | number}}</p>
+            <label>Votre prix est :</label>
+            <input class="input-search" v-model="price">
+            <p v-if="number">Dernier prix : {{number | number}}</p>
+            <div v-if="etat">
+                <img :src="getImgUrl(etat)" :alt="etat">
+            </div>
         </div>
         <div v-else>
-            {{message}}
-            <button @click="reset">Encore ?</button>
+            <p>Bravo, vous gagnez en {{counter}} essais</p>
+            <button class="button-new-game" @click="reset">Nouvelle partie</button>
         </div>
     </div>
 
@@ -30,56 +27,59 @@
                 number: '',
                 limit: '',
                 justPrice: '',
-                search: false,
                 win: false,
-                message : '',
-                counter:0
+                counter: 0,
+                etat: ''
             }
         },
-        computed : {
-            price : {
-                get: function() {
+        beforeMount() {
+            this.limit = 10000;
+            this.randomNumber();
+        },
+        filters: {
+            number(number) {
+                return new Intl.NumberFormat('fr-FR', {maximumSignificantDigits: 3}).format(number)
+            }
+        },
+        computed: {
+            price: {
+                get: function () {
                     return '';
                 },
-                set : _.debounce(function (newValue) {
+                set: _.debounce(function (newValue) {
                     ++this.counter;
-                    this.number = newValue;
-                    if (newValue == this.justPrice){
-                        this.win = true;
-                        this.message = `Bravo vous avez gagnez en ${this.counter} essais!!!`
-                    } else if(this.number > this.justPrice) {
-                        this.message = "Le nombre est plus petit."
+                    newValue = parseInt(newValue);
+                    if (isNaN(newValue)) {
+                        this.etat = 'stop';
                     } else {
-                        this.message = "Le nombre est plus grand."
+                        this.number = newValue;
+                        if (newValue == this.justPrice) {
+                            this.win = true;
+                        } else if (this.number > this.justPrice) {
+                            this.etat = "b-minus";
+                        } else {
+                            this.etat = "b-plus"
+                        }
                     }
-
-                },700)
-            }
-        },
-        watch : {
-            limit() {
-                this.limit = parseInt(this.limit);
-                this.randomNumber();
+                }, 700)
             }
         },
         methods: {
-            reset(){
-                this.number= '';
-                this.limit= '';
-                this.justPrice= '';
-                this.search= false;
-                this.win= false;
-                this.message= '';
-                this.counter=0
+            getImgUrl(etat) {
+                var images = require.context('../assets/img/', false, /\.png$/);
+                return images('./' + etat + ".png")
             },
-            randomNumber: _.debounce(function () {
-                if (typeof this.limit === 'number' && this.limit){
-                    this.justPrice = Math.floor(Math.random() * Math.floor(this.limit));
-                    this.search = true;
-                } else {
-                    this.limit = '';
-                }
-            }, 700)
+            reset() {
+                this.number = '';
+                this.justPrice = '';
+                this.win = false;
+                this.counter = 0;
+                this.etat = '';
+                this.randomNumber();
+            },
+            randomNumber() {
+                this.justPrice = Math.floor(Math.random() * Math.floor(this.limit));
+            }
         }
     }
 </script>

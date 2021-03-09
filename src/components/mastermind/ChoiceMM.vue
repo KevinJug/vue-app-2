@@ -1,7 +1,7 @@
 <template>
     <div class="center">
         <div>
-            <button v-if="swap" class="button-validate" @click="validateColorsCircle" :disabled="validateColors">
+            <button  class="button-validate" v-if="swap" @click="validateColorsCircle" :disabled="validateColors">
                 Valider
             </button>
             <div class="border choice-bord padding-10">

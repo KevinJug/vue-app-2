@@ -4,8 +4,13 @@
 
 .button-validate {
     margin: 10px;
-    width: 100px;
-    padding: 10px 10px;
+    padding: 10px;
+    width: 200px;
+    border-radius: 5px;
+    border: 1px solid black;
+    background: #B36DF5;
+    color: white;
+    box-shadow: 3px 3px 3px 0px rgb(0 0 0 / 75%);
 }
 
 .center {
@@ -36,16 +41,8 @@
     background-color: blue;
 }
 
-.circle-good {
-    background-color: #FFAB4C;
-}
-
 .circle-green {
     background-color: green;
-}
-
-.circle-perfect {
-    background-color: #9BFF4C;
 }
 
 .circle-purple {
@@ -63,6 +60,7 @@
 .choice-bord {
     display: flex;
     flex-direction: row;
+    background-color: brown;
 }
 
 .legend {
@@ -83,7 +81,32 @@
     cursor: pointer;
 }
 
-.width-50 {
-    width: 50px;
+.width-70 {
+    width: 70px;
+    width: 70px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 2px;
+    grid-template-rows: repeat(2, 1fr);
+    align-items: center;
 }
 
+.triangle-code-perfect{
+    display : inline-block;
+    margin: 2px 5px;
+    height : 0;
+    width : 0;
+    border-right : 12px solid transparent;
+    border-bottom : 20px solid #80F33E;
+    border-left : 12px solid transparent;
+}
+
+.triangle-code-good{
+    display : inline-block;
+    margin: 2px 5px;
+    height : 0;
+    width : 0;
+    border-right : 12px solid transparent;
+    border-bottom : 20px solid #FFAB4C;
+    border-left : 12px solid transparent;
+}

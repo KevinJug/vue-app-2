@@ -2,14 +2,15 @@
     <div>
         <div v-for="(result, index) in results" class="center">
             <div class="choice-bord">
-                <div class="border width-50 circle-perfect">
-                    <p>{{result.result.perfect}}</p>
+                <div class="border width-70 circle-perfect">
+                    <p v-for="n in result.result.perfect" class="triangle-code-perfect" :key="n"></p>
+<!--                    <p>{{result.result.perfect}}</p>-->
                 </div>
                 <div class="border choice-bord padding-10">
                     <CircleMM v-for="r in result.data" :key="index + r.index" :colors="r" :swap="swap"/>
                 </div>
-                <div class="border width-50 circle-good">
-                    <p>{{result.result.good}}</p>
+                <div class="border width-70 circle-good">
+                    <p v-for="n in result.result.good" class="triangle-code-good" :key="n"></p>
                 </div>
             </div>
 

@@ -1,0 +1,48 @@
+#app {
+    height: 95vh;
+}
+
+body {
+    background-color: #E1C0E3;
+}
+
+#nav {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    padding: 15px 10px 23px 10px;
+    margin-bottom: 30px;
+    border-bottom: solid;
+}
+
+.padding-5-30 {
+    padding: 5px 30px;
+}
+
+.input-search {
+    margin-left: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid black;
+    width: 50px;
+}
+
+.input-search:hover {
+    border : 1px solid #9FADCD;
+}
+
+.input-search:focus {
+    outline: none;
+    border : 1px solid #696E7B;
+}
+
+.button-new-game {
+    padding: 10px;
+    width: 200px;
+    border-radius: 5px;
+    border: 1px solid black;
+    background: blueviolet;
+    color: white;
+    box-shadow: 8px 8px 5px 0px rgb(0 0 0 / 75%);
+}

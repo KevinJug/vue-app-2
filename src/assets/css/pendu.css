@@ -1,0 +1,21 @@
+.world-secret {
+    color:red;
+    font-weight: bold;
+}
+
+.main {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-gap: 10px;
+    grid-template-rows: repeat(10, 6.1vh);
+}
+
+.search {
+    grid-column: 1 / 4;
+    grid-row: 3 / 9;
+}
+
+.img-pendu {
+    grid-column: 4 / 8;
+    grid-row: 1 / 10;
+}

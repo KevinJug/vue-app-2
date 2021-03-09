@@ -4,12 +4,12 @@
             <ChoiceMM :colors="colors" @validate="validateColorsCircle" :swap="true"/>
         </div>
         <div v-else-if="victory === 4">
-            <p> Bravo vous avez gagner.</p>
-            <button @click="newGame" :swap="false">Nouvelle partie</button>
+            <p> Bravo, vous avez gagné.</p>
+            <button class="button-new-game" @click="newGame" :swap="false">Nouvelle partie</button>
         </div>
         <div v-else>
-            <p> Dommage vous avez partie.</p>
-            <button @click="newGame" :swap="false">Nouvelle partie</button>
+            <p> Dommage vous avez perdu.</p>
+            <button class="button-new-game" @click="newGame" :swap="false">Nouvelle partie</button>
         </div>
         <div v-if="victory === 4 || nbTest === 12" class="center margin-10">
             <WinResultMM :combination="combination"/>
@@ -19,10 +19,10 @@
         </div>
         <div class="margin-10 center-legend">
             <div class="legend">
-                <span class="circle circle-perfect"></span><span>Couleur bien placée.</span>
+                <span class="triangle-code-perfect"></span><span>Couleur bien placée.</span>
             </div>
             <div class="legend">
-                <span class="circle circle-good"></span><span>Couleur existante mais mal placée.</span>
+                <span class="triangle-code-good"></span><span>Couleur existante mais mal placée.</span>
             </div>
         </div>
 
@@ -46,7 +46,7 @@
                 colors: ['red', 'blue', 'green', 'purple', 'black', 'white'],
                 combination: [],
                 lastResult: [],
-                nbTest:0,
+                nbTest: 0,
                 victory: 0
 
             }
@@ -55,11 +55,11 @@
             this.createCombination();
         },
         methods: {
-            newGame(){
-              this.createCombination();
-              this.lastResult = [];
-              this.nbTest = 0;
-              this.victory= 0;
+            newGame() {
+                this.createCombination();
+                this.lastResult = [];
+                this.nbTest = 0;
+                this.victory = 0;
             },
             createCombination() {
                 this.combination = [];
@@ -67,19 +67,30 @@
                     let value = Math.floor(Math.random() * 6);
                     this.combination.push(this.colors[value]);
                 }
+                console.log(this.combination);
             },
             validateColorsCircle(data) {
                 let arrayVerification = [];
                 let combination = [...this.combination];
+                let dataColor = data.reduce((acc, obj) => {
+                    acc.push(obj.colors);
+                    return acc
+                },[]);
                 for (let i = 0; i < 4; ++i) {
                     if (data[i].colors === this.combination[i]) {
                         arrayVerification.push(1);
-                    } else if (combination.find((colors) => colors === data[i].colors)) {
-                        arrayVerification.push(0);
-                    } else {
-                        arrayVerification.push(-1);
+                        combination[i] = "";
+                        dataColor[i] = "";
                     }
-                    combination[combination.indexOf(data[i].colors)] = "";
+                }
+                for (let i = 0; i < 4; ++i) {
+                    if(dataColor[i] !== ""){
+                        let indexCombination = combination.indexOf(dataColor[i]);
+                        if (indexCombination !== -1) {
+                            arrayVerification.push(0);
+                            combination[indexCombination] = "";
+                        }
+                    }
                 }
                 ++this.nbTest;
                 this.victory = arrayVerification.filter(r => r === 1).length;

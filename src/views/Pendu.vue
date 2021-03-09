@@ -1,14 +1,19 @@
 <template>
-    <div>
-        <div v-if="counter < 5">
-            <input v-model="newChar" maxlength="1">
-            <p>{{hideWord}}</p>
+    <div class="main">
+        <div class="search">
+            <div v-if="counter < 5">
+                <p>Quel est votre caractère ?</p>
+                <input class="input-search" v-model="newChar" maxlength="1">
+                <p>{{hideWord}}</p>
+            </div>
+            <div v-else>
+                <p>Vous avez perdu, le mot est : <span class="world-secret">{{word}}</span></p>
+                <button class="button-new-game" @click="restart">Nouvelle partie</button>
+            </div>
         </div>
-        <div v-else>
-            <p>Vous avez perdu, le mot état : {{word}}</p>
-            <button @click="restart">Recommencez</button>
+        <div class="img-pendu">
+            <img v-if="counter !== 0" alt="pendu" :src="getImgUrl(counter)" width="350px" height="470px">
         </div>
-        <img v-if="counter !== 0" alt="pendu" :src="getImgUrl(counter)" width="300px" height="500px">
     </div>
 </template>
 <script>
@@ -106,5 +111,5 @@
 </script>
 
 <style scoped>
-
+@import "../assets/css/pendu.css";
 </style>
