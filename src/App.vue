@@ -10,6 +10,9 @@
       <div class="padding-5-30">
         <router-link to="/mastermind"><img alt="Vue logo" src="./assets/img/mastermind.png" height="50px"></router-link>
       </div>
+      <div class="padding-5-30">
+        <router-link to="/classement"><img alt="Vue logo" src="./assets/img/classement.png"  height="50px"></router-link>
+      </div>
     </div>
     <router-view/>
   </div>

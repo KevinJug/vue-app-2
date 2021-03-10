@@ -22,6 +22,11 @@
     grid-row: 6 / 11;
 }
 
+.classement {
+    grid-column: 6 / 11;
+    grid-row: 6 / 11;
+}
+
 .img-home {
     display: flex;
     align-items: center;

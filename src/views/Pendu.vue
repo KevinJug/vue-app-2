@@ -1,10 +1,24 @@
 <template>
     <div class="main">
         <div class="search">
-            <div v-if="counter < 5">
+            <div v-if="win">
+                <p>Bravo vous avez trouver.</p>
+                <p>Le mot est {{ word }}.</p>
+            </div>
+            <div v-else-if="counter < 5">
                 <p>Quel est votre caractère ?</p>
                 <input class="input-search" v-model="newChar" maxlength="1">
                 <p>{{hideWord}}</p>
+            </div>
+            <div v-else-if="goodWord > 0">
+                <p>Vous avez trouver {{ goodWord}} {{ goodWord > 1 ? 'mots' : 'mot' }}.</p>
+                <div class="margin-b15" v-if="stateRecord">
+                    <input class="input-rank" v-model="record">
+                    <button @click="recordRanking" class="button-rank">Enregistrer dans le classement</button>
+                </div>
+                <div>
+                    <button class="button-new-game" @click="restart(true)">Nouvelle partie</button>
+                </div>
             </div>
             <div v-else>
                 <p>Vous avez perdu, le mot est : <span class="world-secret">{{word}}</span></p>
@@ -17,11 +31,13 @@
     </div>
 </template>
 <script>
+    import mixinRanking from "../mixin/ranking";
     const words = require('../utils/word.json');
     import _ from 'lodash';
 
     export default {
         name: "Pendu",
+        mixins: [mixinRanking],
         data() {
             return {
                 word: '',
@@ -29,7 +45,11 @@
                 hideWord: '',
                 regex: /[a-zÀ-ÿ]/gi,
                 lastCharacter: '',
-                counter: 0
+                counter: 0,
+                record: '',
+                goodWord: 0,
+                win: false,
+                stateRecord: true
             }
         },
         beforeMount() {
@@ -41,23 +61,24 @@
                     return '';
                 },
                 set: _.debounce(function (newValue) {
-                    this.lastCharacter = newValue;
+                    this.lastCharacter = newValue.toLowerCase();
                     this.validateCharacter();
                 }, 500)
             }
         },
         methods: {
-            restart() {
+            restart(reset) {
+                this.goodWord = reset ? 0 : this.goodWord;
                 this.findWord();
                 this.counter= 0;
+                this.stateRecord= true;
             },
             getImgUrl(counter) {
-            // ../assets/img/pendu-5.png
                 var images = require.context('../assets/img/', false, /\.png$/);
                 return images('./pendu-' + counter + ".png")
             },
             findWord() {
-                this.word = this.swapOE(words[Math.floor(Math.random() * 22738)]);
+                this.word = this.swapOE(words[Math.floor(Math.random() * 22738)]).toLowerCase();
                 this.wordNoAccent = this.swapAccent(this.word);
                 this.hideWord = this.word.replace(this.regex, '_').replace(/(.{1})/g, '$1 ');
             },
@@ -75,6 +96,8 @@
                         initSearch = indexOfCharacter + 1;
                     }
                 } while (find);
+
+                this.checkWin();
 
             },
             checkCharacter(index) {
@@ -105,6 +128,22 @@
                 return str.replace(/./g, function ($0) {
                     return (arrayCorrection[$0]) ? arrayCorrection[$0] : $0
                 });
+            },
+            checkWin() {
+               if(this.wordNoAccent === this.swapAccent(this.hideWord.replace(/\s/g, ''))) {
+                    this.win = true;
+                    ++this.goodWord;
+                    setTimeout(()=>{
+                        this.win = false;
+                        this.restart();
+                    }, 2000)
+                }
+            },
+            recordRanking() {
+                if (this.record) {
+                    this.rankingPendu({number: this.goodWord, name: this.record});
+                    this.stateRecord = false;
+                }
             }
         }
     }

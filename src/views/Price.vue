@@ -10,18 +10,23 @@
             </div>
         </div>
         <div v-else>
-            <p>Bravo, vous gagnez en {{counter}} essais</p>
+            <p>Bravo, vous gagnez en {{counter}} essais et en {{ timerF | hours }}.</p>
+            <div class="margin-b15" v-if="stateRecord">
+                <input class="input-rank" v-model="record">
+                <button @click="recordRanking" class="button-rank">Enregistrer dans le classement</button>
+            </div>
             <button class="button-new-game" @click="reset">Nouvelle partie</button>
         </div>
     </div>
-
 </template>
 
 <script>
     import _ from "lodash";
+    import mixinRanking from "../mixin/ranking";
 
     export default {
         name: "Price",
+        mixins: [mixinRanking],
         data() {
             return {
                 number: '',
@@ -29,7 +34,9 @@
                 justPrice: '',
                 win: false,
                 counter: 0,
-                etat: ''
+                etat: '',
+                record: '',
+                stateRecord: true
             }
         },
         beforeMount() {
@@ -38,7 +45,7 @@
         },
         filters: {
             number(number) {
-                return new Intl.NumberFormat('fr-FR', {maximumSignificantDigits: 3}).format(number)
+                return new Intl.NumberFormat('fr-FR').format(number)
             }
         },
         computed: {
@@ -55,13 +62,14 @@
                         this.number = newValue;
                         if (newValue == this.justPrice) {
                             this.win = true;
+                            this.endTimer();
                         } else if (this.number > this.justPrice) {
                             this.etat = "b-minus";
                         } else {
                             this.etat = "b-plus"
                         }
                     }
-                }, 700)
+                }, 1000)
             }
         },
         methods: {
@@ -78,7 +86,15 @@
                 this.randomNumber();
             },
             randomNumber() {
+                this.stateRecord= true;
                 this.justPrice = Math.floor(Math.random() * Math.floor(this.limit));
+                this.startTimer();
+            },
+            recordRanking() {
+                if (this.record) {
+                    this.rankingPrice({timerS: this.timerS, timerF: this.timerF, name: this.record});
+                    this.stateRecord = false;
+                }
             }
         }
     }

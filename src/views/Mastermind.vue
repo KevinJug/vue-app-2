@@ -1,17 +1,21 @@
 <template>
     <div>
-        <div v-if="victory < 4 && nbTest < 12">
+        <div v-if="victory < 4 && nbTest < 8">
             <ChoiceMM :colors="colors" @validate="validateColorsCircle" :swap="true"/>
         </div>
         <div v-else-if="victory === 4">
-            <p> Bravo, vous avez gagné.</p>
+            <p> Bravo, vous avez gagné en {{ timerF | hours }}.</p>
+            <div class="margin-b15" v-if="stateRecord">
+                <input class="input-rank" v-model="record">
+                <button @click="recordRanking" class="button-rank">Enregistrer dans le classement</button>
+            </div>
             <button class="button-new-game" @click="newGame" :swap="false">Nouvelle partie</button>
         </div>
         <div v-else>
             <p> Dommage vous avez perdu.</p>
             <button class="button-new-game" @click="newGame" :swap="false">Nouvelle partie</button>
         </div>
-        <div v-if="victory === 4 || nbTest === 12" class="center margin-10">
+        <div v-if="victory === 4 || nbTest === 8" class="center margin-10">
             <WinResultMM :combination="combination"/>
         </div>
         <div>
@@ -33,6 +37,7 @@
     import ChoiceMM from "../components/mastermind/ChoiceMM";
     import LastResultMM from "../components/mastermind/LastResultMM";
     import WinResultMM from "../components/mastermind/WinResultMM";
+    import mixinRanking from "../mixin/ranking";
 
     export default {
         components: {
@@ -41,25 +46,29 @@
             WinResultMM
         },
         name: "Mastermind",
+        mixins: [mixinRanking],
         data() {
             return {
                 colors: ['red', 'blue', 'green', 'purple', 'black', 'white'],
                 combination: [],
                 lastResult: [],
                 nbTest: 0,
-                victory: 0
-
+                victory: 0,
+                record: '',
+                stateRecord:true
             }
         },
         beforeMount() {
-            this.createCombination();
+            this.newGame();
         },
         methods: {
             newGame() {
+                this.stateRecord= true;
                 this.createCombination();
                 this.lastResult = [];
                 this.nbTest = 0;
                 this.victory = 0;
+                this.startTimer();
             },
             createCombination() {
                 this.combination = [];
@@ -75,7 +84,7 @@
                 let dataColor = data.reduce((acc, obj) => {
                     acc.push(obj.colors);
                     return acc
-                },[]);
+                }, []);
                 for (let i = 0; i < 4; ++i) {
                     if (data[i].colors === this.combination[i]) {
                         arrayVerification.push(1);
@@ -84,7 +93,7 @@
                     }
                 }
                 for (let i = 0; i < 4; ++i) {
-                    if(dataColor[i] !== ""){
+                    if (dataColor[i] !== "") {
                         let indexCombination = combination.indexOf(dataColor[i]);
                         if (indexCombination !== -1) {
                             arrayVerification.push(0);
@@ -102,6 +111,15 @@
                             good: arrayVerification.filter(r => r === 0).length
                         }
                     });
+                if (this.victory === 4 || this.test === 8) {
+                    this.endTimer();
+                }
+            },
+            recordRanking() {
+                if (this.record) {
+                    this.rankingMastermind({timerS: this.timerS, timerF: this.timerF, name: this.record});
+                    this.stateRecord = false;
+                }
             }
         }
     }

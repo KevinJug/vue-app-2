@@ -1,0 +1,106 @@
+.classement {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-gap: 5px;
+    grid-template-rows: repeat(8, 8.3vh);
+    /*min-height: 100%;*/
+    padding: 4px;
+}
+
+/************/
+/*Juste Prix*/
+/************/
+.rankingPrice {
+    grid-column: 1 / 5;
+    grid-row: 1 / 8;
+    border-right: 3px solid black;
+}
+
+.rankingPriceState {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-gap: 5px;
+    grid-template-rows: repeat(1, 50px);
+    min-height: 100%;
+    padding: 4px;
+}
+
+.rankingPriceRank {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.rankingPriceName {
+    grid-column: 3 / 7;
+    grid-row: 1;
+}
+
+.rankingPriceTimer {
+    grid-column: 8 / 10;
+    grid-row: 1;
+}
+
+/************/
+/*Pendu*/
+/************/
+.rankingPendu {
+    grid-column: 5 / 9;
+    grid-row: 1 / 8;
+    border-right: 3px solid black;
+}
+
+.rankingPenduState {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-gap: 5px;
+    grid-template-rows: repeat(1, 50px);
+    min-height: 100%;
+    padding: 4px;
+}
+
+.rankingPenduRank {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.rankingPenduName {
+    grid-column: 3 / 7;
+    grid-row: 1;
+}
+
+.rankingPenduTimer {
+    grid-column: 8 / 10;
+    grid-row: 1;
+}
+
+/************/
+/*Mastermind*/
+/************/
+.rankingMastermind {
+    grid-column: 9 / 13;
+    grid-row: 1 / 8;
+}
+
+.rankingMastermindState {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-gap: 5px;
+    grid-template-rows: repeat(1, 50px);
+    min-height: 100%;
+    padding: 4px;
+}
+
+.rankingMastermindRank {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.rankingMastermindName {
+    grid-column: 3 / 7;
+    grid-row: 1;
+}
+
+.rankingMastermindTimer {
+    grid-column: 8 / 10;
+    grid-row: 1;
+}
