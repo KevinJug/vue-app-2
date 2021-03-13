@@ -1,5 +1,13 @@
 <template>
     <div>
+        <div class="center">
+            <div class="choice-drag-drop padding-10">
+                <drag v-for="(color,index) in colors" :key="index" class="circle border"
+                      :class="'circle-' + color" :data="{color: color, index: index}" go-back>
+                </drag>
+            </div>
+        </div>
+
         <div v-if="victory < 4 && nbTest < 8">
             <ChoiceMM :colors="colors" @validate="validateColorsCircle" :swap="true"/>
         </div>
@@ -9,11 +17,11 @@
                 <input class="input-rank" v-model="record">
                 <button @click="recordRanking" class="button-rank">Enregistrer dans le classement</button>
             </div>
-            <button class="button-new-game" @click="newGame" :swap="false">Nouvelle partie</button>
+            <button class="button-new-game" @click="newGame">Nouvelle partie</button>
         </div>
         <div v-else>
             <p> Dommage vous avez perdu.</p>
-            <button class="button-new-game" @click="newGame" :swap="false">Nouvelle partie</button>
+            <button class="button-new-game" @click="newGame">Nouvelle partie</button>
         </div>
         <div v-if="victory === 4 || nbTest === 8" class="center margin-10">
             <WinResultMM :combination="combination"/>
@@ -38,10 +46,12 @@
     import LastResultMM from "../components/mastermind/LastResultMM";
     import WinResultMM from "../components/mastermind/WinResultMM";
     import mixinRanking from "../mixin/ranking";
+    import { Drag } from "vue-easy-dnd";
 
     export default {
         components: {
             ChoiceMM,
+            Drag,
             LastResultMM,
             WinResultMM
         },
@@ -55,7 +65,7 @@
                 nbTest: 0,
                 victory: 0,
                 record: '',
-                stateRecord:true
+                stateRecord: true
             }
         },
         beforeMount() {
@@ -63,7 +73,7 @@
         },
         methods: {
             newGame() {
-                this.stateRecord= true;
+                this.stateRecord = true;
                 this.createCombination();
                 this.lastResult = [];
                 this.nbTest = 0;

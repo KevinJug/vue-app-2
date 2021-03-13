@@ -1,17 +1,21 @@
 <template>
     <div>
-        <p
-                class="circle center border"
-                @click="swapColorCircle"
-                :class="[this.colors.indexColors !== -1 ? 'circle-' + this.colors.colors : '', swap ? 'pointer' : '']"
-        >{{colors.initialization}}</p>
-    </div>
+        <drop class="circle center border" :class="this.colors.colors !== '' ? 'circle-' + this.colors.colors : ''"
+              @drop="swapColorCircle">
+            <p>{{this.colors.colors ? '' : '?'}}</p>
+        </drop>
+       </div>
 
 </template>
 
 <script>
+    import {Drop} from "vue-easy-dnd";
+
     export default {
         name: "CircleMM",
+        components: {
+            Drop
+        },
         props: {
             colors: {
                 type: Object
@@ -20,11 +24,17 @@
                 type: Boolean,
             }
         },
+        data() {
+            return {
+                color: ''
+            }
+        },
         methods: {
-            swapColorCircle() {
-                if (this.swap){
-                    this.colors.initialization = "";
-                    this.$emit('change-colors',this.colors);
+            swapColorCircle(e) {
+                if (this.swap) {
+                    this.colors.colors = e.data.color;
+                    this.colors.indexColors = e.data.index;
+                    this.$emit('change-colors', this.colors);
                 }
             }
         }

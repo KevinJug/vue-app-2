@@ -4,7 +4,6 @@
             <div class="choice-bord">
                 <div class="border width-70 circle-perfect">
                     <p v-for="n in result.result.perfect" class="triangle-code-perfect" :key="n"></p>
-<!--                    <p>{{result.result.perfect}}</p>-->
                 </div>
                 <div class="border choice-bord padding-10">
                     <CircleMM v-for="r in result.data" :key="index + r.index" :colors="r" :swap="swap"/>
@@ -13,7 +12,6 @@
                     <p v-for="n in result.result.good" class="triangle-code-good" :key="n"></p>
                 </div>
             </div>
-
         </div>
     </div>
 </template>

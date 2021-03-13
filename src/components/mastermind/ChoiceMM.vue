@@ -34,34 +34,25 @@
                     colors: '',
                     indexColors: -1,
                     index: 1,
-                    initialization: "?"
                 }, {
                     colors: '',
                     indexColors: -1,
                     index: 2,
-                    initialization: "?"
                 }, {
                     colors: '',
                     indexColors: -1,
                     index: 3,
-                    initialization: "?"
                 }, {
                     colors: '',
                     indexColors: -1,
                     index: 4,
-                    initialization: "?"
                 }],
                 validateColors: true
             }
         },
         methods: {
             swapColorCircle(data) {
-                if (data.indexColors === -1 || data.indexColors === 5) {
-                    data.indexColors = 0;
-                } else {
-                    ++data.indexColors;
-                }
-                data.colors = this.colors[data.indexColors];
+                this.currentColors[data.index - 1] = data;
                 this.checkValidateColors();
             },
             validateColorsCircle() {
@@ -71,7 +62,6 @@
                     this.currentColors.forEach((colors) => {
                         colors.colors = '';
                         colors.indexColors = -1;
-                        colors.initialization = "?";
                     })
                 }
             },
