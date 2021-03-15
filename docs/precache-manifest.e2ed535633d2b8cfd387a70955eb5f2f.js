@@ -1,11 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e422ad1123f2385c8b9e",
-    "url": "/vue-app-2/css/about.2fe72969.css"
+    "revision": "b117956848a1bf547017",
+    "url": "/vue-app-2/css/app.8db96ed3.css"
   },
   {
-    "revision": "15b0bc99f19d48507228",
-    "url": "/vue-app-2/css/app.9fe6a429.css"
+    "revision": "6daa4868e961c8c43a2a",
+    "url": "/vue-app-2/css/chunk-60817fee.a9581f23.css"
+  },
+  {
+    "revision": "2b4cd3e69da4e02091b3",
+    "url": "/vue-app-2/css/chunk-6fe3c1b5.9c7af26d.css"
+  },
+  {
+    "revision": "a236d03952fc4ad9902b",
+    "url": "/vue-app-2/css/chunk-7e3e6fd4.1db3dd46.css"
   },
   {
     "revision": "40478503a1f55463614050ee5ab0d069",
@@ -56,16 +64,36 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/vue-app-2/img/stop.10dc486e.png"
   },
   {
-    "revision": "3ed22a10cdef5709c53d7ffb0f8f6350",
+    "revision": "f3dc7726f571ddc8318b1e084f3a044d",
     "url": "/vue-app-2/index.html"
   },
   {
-    "revision": "e422ad1123f2385c8b9e",
-    "url": "/vue-app-2/js/about.b2a1fd03.js"
+    "revision": "b117956848a1bf547017",
+    "url": "/vue-app-2/js/app.705386f8.js"
   },
   {
-    "revision": "15b0bc99f19d48507228",
-    "url": "/vue-app-2/js/app.f62b0130.js"
+    "revision": "109e32b8c4d0ad5aafe2",
+    "url": "/vue-app-2/js/chunk-0e60169c.de0be127.js"
+  },
+  {
+    "revision": "e43b5f87334ba3a25abe",
+    "url": "/vue-app-2/js/chunk-10e952b7.e830eec5.js"
+  },
+  {
+    "revision": "fe1299700b3e7120637b",
+    "url": "/vue-app-2/js/chunk-2d21e1c8.4d8bd8a3.js"
+  },
+  {
+    "revision": "6daa4868e961c8c43a2a",
+    "url": "/vue-app-2/js/chunk-60817fee.35d6497a.js"
+  },
+  {
+    "revision": "2b4cd3e69da4e02091b3",
+    "url": "/vue-app-2/js/chunk-6fe3c1b5.54e328e4.js"
+  },
+  {
+    "revision": "a236d03952fc4ad9902b",
+    "url": "/vue-app-2/js/chunk-7e3e6fd4.efb40a1f.js"
   },
   {
     "revision": "7365a38acce2dddea1f2",

@@ -6,7 +6,7 @@ export default {
             intervalId: null,
             storageRanking: {
                 price: [],
-                pendu: [],
+                pendu: {easy: [], hard: []},
                 mastermind: []
             },
             timerS: 0,
@@ -76,15 +76,15 @@ export default {
         },
         rankingPendu(ranking) {
             this.getStorage();
-            let rankingPendu = this.storageRanking.pendu;
-            rankingPendu.push(ranking);
+            let rankingPendu = this.storageRanking.pendu[ranking[0]];
+            rankingPendu.push(ranking[1]);
             rankingPendu.sort(function (a, b) {
                 return a.number - b.number;
             });
             if (rankingPendu.length > 5) {
                 rankingPendu.pop();
             }
-            this.storageRanking.pendu = rankingPendu;
+            this.storageRanking.pendu[ranking[0]] = rankingPendu;
             this.setStorage();
         }
     }

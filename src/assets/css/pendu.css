@@ -1,6 +1,25 @@
 .world-secret {
-    color:red;
+    color: red;
     font-weight: bold;
+}
+
+.letters {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 30px;
+}
+
+.letter {
+    padding: 5px;
+}
+
+.letter:hover {
+    cursor: pointer;
+    color: red;
+}
+
+.letter:active {
+    color: blue;
 }
 
 .main {

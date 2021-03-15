@@ -7,7 +7,6 @@
                 </drag>
             </div>
         </div>
-
         <div v-if="victory < 4 && nbTest < 8">
             <ChoiceMM :colors="colors" @validate="validateColorsCircle" :swap="true"/>
         </div>
@@ -86,7 +85,6 @@
                     let value = Math.floor(Math.random() * 6);
                     this.combination.push(this.colors[value]);
                 }
-                console.log(this.combination);
             },
             validateColorsCircle(data) {
                 let arrayVerification = [];

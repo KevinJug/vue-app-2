@@ -27,6 +27,30 @@
     grid-row: 6 / 11;
 }
 
+.modes {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.mode {
+    text-decoration: underline;
+}
+
+.mode:hover {
+    cursor: pointer;
+    color: red;
+}
+
+.mode:active {
+    color: blue;
+}
+
+.actived {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
 .img-home {
     display: flex;
     align-items: center;

@@ -1,0 +1,1 @@
+.world-secret{color:red;font-weight:700}.letters{display:flex;flex-wrap:wrap;margin:30px}.letter{padding:5px}.letter:hover{cursor:pointer;color:red}.letter:active{color:#00f}.main{display:grid;grid-template-columns:repeat(9,1fr);grid-gap:10px;grid-template-rows:repeat(10,6.1vh)}.search{grid-column:1/4;grid-row:3/9}.img-pendu{grid-column:4/8;grid-row:1/10}
